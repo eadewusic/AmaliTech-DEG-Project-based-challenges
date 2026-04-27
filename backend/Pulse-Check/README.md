@@ -16,7 +16,8 @@ This API is built using **Python 3** and **FastAPI**.
 
 **1. Clone the repository and navigate to the project folder:**
 ```bash
-git clone <your-fork-url>
+git clone https://github.com/eadewusic/AmaliTech-DEG-Project-based-challenges.git
+
 cd AmaliTech-DEG-Project-based-challenges/backend/Pulse-Check
 ```
 
@@ -29,7 +30,8 @@ pip install -r requirements.txt
 ```bash
 uvicorn main:app --reload
 ```
-The server will start at `http://127.0.0.1:8000`. You can access the interactive Swagger UI documentation at `http://127.0.0.1:8000/docs`.
+- The server will start at `http://127.0.0.1:8000`
+- You can access the interactive Swagger UI documentation at `http://127.0.0.1:8000/docs`
 
 ## 3. API Documentation
 
@@ -48,6 +50,7 @@ Registers a new remote device and begins its countdown timer.
 
 ### II. Send a Heartbeat (Reset)
 ![image](./images/heartbeat-test.png)
+
 Receives a ping from the remote device and resets its countdown timer back to zero.
 *   **Endpoint:** `POST /monitors/{id}/heartbeat`
 *   **Path Parameter:** `id` (string)
@@ -56,11 +59,14 @@ Receives a ping from the remote device and resets its countdown timer back to ze
 
 ### III. The Background Alert (Failure State/ Watchdog)
 ![image](./images/fast-test.png)
+
 The API runs a continuous `asyncio` background task. If an active device exceeds its timeout without sending a heartbeat, the system logs the following critical error to the server console:
+
 `{'ALERT': 'Device device-123 is down!', 'time': '<timestamp>', 'email_sent_to': 'admin@critmon.com'}`
 
 ### IV. Pause a Monitor (Snooze)
 ![image](./images/pause-test.png)
+
 Pauses the timer indefinitely so maintenance technicians can work on a device without triggering false alerts. Hitting the heartbeat endpoint will un-pause the monitor.
 *   **Endpoint:** `POST /monitors/{id}/pause`
 *   **Path Parameter:** `id` (string)
